@@ -85,24 +85,25 @@ function setupUIElements() {
 	});
 }
 function changeUIElements(index, val) {
+	console.log("i funktion");
    switch(index){
    	case lowerDepthRange:
-   		$( "#depth-range-lower" ).val( index );
+   		$( "#depth-range-lower" ).val( val );
    	break;
    	case upperDepthRange:
-   		$( "#depth-range-higher" ).val( index );
+   		$( "#depth-range-higher" ).val( val );
    	break;
    	case maskingColorRed:
-   		$( "#masking-color-red" ).val( index );
+   		$( "#masking-color-red" ).val( val );
    	break;
    	case maskingColorGreen:
-   		$( "#masking-color-green" ).val( index );
+   		$( "#masking-color-green" ).val( val );
    	break;
    	case maskingColorBlue:
-   		$( "#masking-color-green" ).val( index );
+   		$( "#masking-color-green" ).val( val );
    	break;
    	case maskingColorDistance:
-   		$( "#color-tolerance" ).val( index );
+   		$( "#color-tolerance" ).val( val );
    	break;
    }
 }
