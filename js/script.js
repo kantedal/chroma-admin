@@ -11,25 +11,26 @@ var maskingColorDistance = 5;
 var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
 function setupSocketClient(){
-	var IP = "";
+
 	ref.on("value", function(snapshot) {
 	  var value = snapshot.val();
-	  IP = value.host_ip;
+	  var IP = value.host_ip;
+	  ws = new WebSocket(IP);
+	//ws = new WebSocket("ws://130.236.124.119:8080/echo");
+
+		ws.onmessage = function(evt){
+			console.log(evt.data);
+		};
+
+		ws.onopen = function(evt){
+			isConnected = true;
+		}
 	  
 	}, function (errorObject) {
 	  console.log("The read failed: " + errorObject.code);
 	});
-	console.log(IP);
-	ws = new WebSocket(IP);
-	//ws = new WebSocket("ws://130.236.124.119:8080/echo");
 
-	ws.onmessage = function(evt){
-		console.log(evt.data);
-	};
-
-	ws.onopen = function(evt){
-		isConnected = true;
-	}
+	
 }
 
 //Attr is the attribute to ed 
