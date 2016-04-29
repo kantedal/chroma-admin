@@ -7,7 +7,7 @@ var maskingColorRed = 2;
 var maskingColorGreen = 3;
 var maskingColorBlue = 4;
 var maskingColorDistance = 5;
-var maskingColorAuto = 5;
+var maskingColorAuto = 6;
 
 var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
@@ -21,6 +21,8 @@ function setupSocketClient(){
 
 		ws.onmessage = function(evt){
 			console.log(evt.data);
+			$("#depth-range-slider").slider('values',0,50); // sets first handle (index 0) to 50
+			$("#depth-range-slider").slider('values',1,80);
 		};
 
 		ws.onopen = function(evt){
