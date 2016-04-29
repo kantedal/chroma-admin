@@ -8,9 +8,9 @@ var maskingColorGreen = 3;
 var maskingColorBlue = 4;
 var maskingColorDistance = 5;
 
+var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
 function setupSocketClient(){
-	var ref = new Firebase("https://kromakey.firebaseio.com/data");
 	var IP = "";
 	ref.on("value", function(snapshot) {
 	  var value = snapshot.val();
