@@ -21,7 +21,7 @@ function setupSocketClient(){
 
 		ws.onmessage = function(evt){
 			console.log(evt.data);
-			$( "#depth-range-lower" ).slider( "value", 50 );
+			$( "#depth-range-lower" ).val( 50 );
 		};
 
 		ws.onopen = function(evt){
