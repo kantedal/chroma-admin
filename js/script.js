@@ -83,7 +83,7 @@ function setupUIElements() {
     		$("#masking-color-blue").val()+")");
 	});
 }
-function changeUIElements(var index, var val) {
+function changeUIElements(index, val) {
    switch(val){
    	case lowerDepthRange:
    		$( "#depth-range-lower" ).val( index );
