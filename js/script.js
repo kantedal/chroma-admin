@@ -85,7 +85,7 @@ function setupUIElements() {
 	});
 }
 function changeUIElements(index, val) {
-   switch(val){
+   switch(index){
    	case lowerDepthRange:
    		$( "#depth-range-lower" ).val( index );
    	break;
