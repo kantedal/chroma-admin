@@ -7,6 +7,7 @@ var maskingColorRed = 2;
 var maskingColorGreen = 3;
 var maskingColorBlue = 4;
 var maskingColorDistance = 5;
+var maskingColorAuto = 5;
 
 var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
