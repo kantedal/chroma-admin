@@ -20,8 +20,10 @@ function setupSocketClient(){
 	//ws = new WebSocket("ws://130.236.124.119:8080/echo");
 
 		ws.onmessage = function(evt){
-			console.log(evt.data);
-			$( "#depth-range-lower" ).val( 500 );
+			
+			var res = evt.data.split(";").map(Number);
+			console.log(res[0] + "   " + res[1]);
+			//$( "#depth-range-lower" ).val( 500 );
 		};
 
 		ws.onopen = function(evt){
