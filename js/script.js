@@ -1,13 +1,11 @@
 var ws;
 var isConnected = false;
 
-var lowerDepthRange = 0;
-var upperDepthRange = 1;
-var maskingColorRed = 2;
-var maskingColorGreen = 3;
-var maskingColorBlue = 4;
-var maskingColorDistance = 5;
-var maskingColorAuto = 6;
+var maskingColorRed = 0;
+var maskingColorGreen = 1;
+var maskingColorBlue = 2;
+var maskingColorDistance = 3;
+var maskingColorAuto = 4;
 
 var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
@@ -22,9 +20,9 @@ function setupSocketClient(){
 		ws.onmessage = function(evt){
 			
 			var res = evt.data.split(";").map(Number);
-			console.log(res[0] + "   " + res[1]);
+			
 			changeUIElements(res[0], res[1]);
-			//$( "#depth-range-lower" ).val( 500 );
+
 		};
 
 		ws.onopen = function(evt){
@@ -48,14 +46,6 @@ function sendMessage(attr, value){
 
 //Add UI elements
 function setupUIElements() {
-    $("#depth-range-lower").on("change", function(){
-	    sendMessage(lowerDepthRange, $(this).val());
-	});
-
-	$("#depth-range-higher").on("change", function(){
-	    sendMessage(upperDepthRange, $(this).val());
-	});
-
 	$("#color-tolerance").on("change", function(){
 	    sendMessage(maskingColorDistance, $(this).val());
 	});
@@ -85,14 +75,7 @@ function setupUIElements() {
 	});
 }
 function changeUIElements(index, val) {
-	console.log("i funktion");
    switch(index){
-   	case lowerDepthRange:
-   		$( "#depth-range-lower" ).val( val );
-   	break;
-   	case upperDepthRange:
-   		$( "#depth-range-higher" ).val( val );
-   	break;
    	case maskingColorRed:
    		$( "#masking-color-red" ).val( val );
    	break;
