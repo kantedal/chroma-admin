@@ -100,7 +100,7 @@ function changeUIElements(index, val) {
    		$( "#masking-color-green" ).val( val );
    	break;
    	case maskingColorBlue:
-   		$( "#masking-color-green" ).val( val );
+   		$( "#masking-color-blue" ).val( val );
    	break;
    	case maskingColorDistance:
    		$( "#color-tolerance" ).val( val );
