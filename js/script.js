@@ -23,6 +23,7 @@ function setupSocketClient(){
 			
 			var res = evt.data.split(";").map(Number);
 			console.log(res[0] + "   " + res[1]);
+			changeUIElements(res[0], res[1]);
 			//$( "#depth-range-lower" ).val( 500 );
 		};
 
