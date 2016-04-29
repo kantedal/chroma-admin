@@ -10,7 +10,17 @@ var maskingColorDistance = 5;
 
 //Setup web socket client for communication 
 function setupSocketClient(){
-	ws = new WebSocket("ws://192.168.1.25:8080/echo");
+	var ref = new Firebase("https://kromakey.firebaseio.com/data");
+	var IP = "";
+	ref.on("value", function(snapshot) {
+	  var value = snapshot.val();
+	  IP = value.host_ip;
+	  
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+	console.log(IP);
+	ws = new WebSocket(IP);
 	//ws = new WebSocket("ws://130.236.124.119:8080/echo");
 
 	ws.onmessage = function(evt){
