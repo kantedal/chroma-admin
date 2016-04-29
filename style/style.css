@@ -1,0 +1,5 @@
+#colorBoxes { max-height: 100px; overflow-y: hidden; }
+.colorBox { width: 30%; height: 50px; float: left; margin: 2px; float: center;}
+.textbox{ width: 100%; }
+.attributeHeader{ margin: 0px !important; }
+.attributeBox { margin: 10px; }

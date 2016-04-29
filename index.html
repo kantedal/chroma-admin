@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-1.12.1.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/script.js"></script>
+	
+	<script>
+	    $(document).bind('mobileinit',function(){
+	        $.mobile.changePage.defaults.changeHash = false;
+	        $.mobile.hashListeningEnabled = false;
+	        $.mobile.pushStateEnabled = false;
+	    });
+	</script> 
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Chromakillers web client</title>
+
+</head>
+<body>
+	<div data-role="page">
+		<div data-role="header" data-add-back-btn="true">
+		   <p align="center">Chromakillers Admin</p>
+		</div>
+
+		<div style="margin:3%;">
+			<div data-role="rangeslider" id="depth-range-slider">
+				<label for="depth-range-lower">Djuptolerans:</label>
+				<input name="depth-range-lower" id="depth-range-lower" min="0" max="65535" value="0" type="range" />
+				<label for="depth-range-higher">Djuptolerans:</label>
+				<input name="depth-range-higher" id="depth-range-higher" min="0" max="65535" value="65535" type="range" />
+			</div>
+
+			<label for="color-tolerance">Färgtolerans:</label>
+			<input name="color-tolerance" id="color-tolerance" min="0" max="255" value="0" type="range"/>
+
+			<label for="masking-color">Maskningsfärg:</label>
+			<input name="masking-color-red" id="masking-color-red" min="0" max="255" value="0" type="range" style="background-color: #bb0000 !important; color:#FFF !important; text-shadow: none !important;"/>
+			<input name="masking-color-green" id="masking-color-green" min="0" max="255" value="0" type="range" style="background-color: #00aa00 !important; color:#FFF !important; text-shadow: none !important;"/>
+			<input name="masking-color-blue" id="masking-color-blue" min="0" max="255" value="0" type="range" style="background-color: #0000aa !important; color:#FFF !important; text-shadow: none !important;"/>
+
+			<div id="mixed-color" style="height: 100px;"> </div>
+
+
+
+		</div>
+
+	</div>	
+
+<!-- 	<div class="attributeBox">
+		<p>
+		  <label for="amount">Djuptolerans:</label>
+		  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</p>
+		 
+		<div id="depth-range-slider"></div>
+	</div>		
+
+	<div class="attributeBox">
+		<p>	
+			<input type="text" id="maskingColorDistanceText" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		</p>
+		<div id="maskingColorDistance-slider"></div>
+	</div>
+
+	<div class="attributeBox">
+		<div id="colorBoxes">
+			<div class="colorBox">
+				<p class="attributeHeader">Röd</p>
+				<input type="number" value="0" max="255" min="0" id="maskingColorRed" class="textbox">
+			</div>
+
+			<div class="colorBox">
+				<p class="attributeHeader">Grön</p>
+				<input type="number" value="0" max="255" min="0" id="maskingColorGreen" class="textbox">
+			</div>
+
+			<div class="colorBox">
+				<p class="attributeHeader">Blå</p>
+				<input type="number" value="0" max="255" min="0" id="maskingColorBlue" class="textbox">
+			</div>
+		</div>
+
+		<div id="selectedColor" style="height:100px; background: rgb(255,255,255);">
+		</div>
+	</div> -->
+
+</body>
+</html>
