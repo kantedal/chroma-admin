@@ -21,8 +21,11 @@ function setupSocketClient(){
 
 		ws.onmessage = function(evt){
 			console.log(evt.data);
-			$("#depth-range-slider").slider('values',0,50); // sets first handle (index 0) to 50
-			$("#depth-range-slider").slider('values',1,80);
+			//$("#depth-range-slider").slider('values',0,50); // sets first handle (index 0) to 50
+			//$("#depth-range-slider").slider('values',1,80);
+			$( "#depth-range-slider" ).change(function() {
+   				 $( "#depth-range-lower" ).slider( "value", 50 );
+			}
 		};
 
 		ws.onopen = function(evt){
