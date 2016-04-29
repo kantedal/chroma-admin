@@ -83,6 +83,28 @@ function setupUIElements() {
     		$("#masking-color-blue").val()+")");
 	});
 }
+function changeUIElements(var index, var val) {
+   switch(val){
+   	case lowerDepthRange:
+   		$( "#depth-range-lower" ).val( index );
+   	break;
+   	case upperDepthRange:
+   		$( "#depth-range-higher" ).val( index );
+   	break;
+   	case maskingColorRed:
+   		$( "#masking-color-red" ).val( index );
+   	break;
+   	case maskingColorGreen:
+   		$( "#masking-color-green" ).val( index );
+   	break;
+   	case maskingColorBlue:
+   		$( "#masking-color-green" ).val( index );
+   	break;
+   	case maskingColorDistance:
+   		$( "#color-tolerance" ).val( index );
+   	break;
+   }
+}
 
 
 window.onload = function(){
