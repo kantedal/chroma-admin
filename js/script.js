@@ -10,7 +10,7 @@ var maskingColorDistance = 5;
 
 //Setup web socket client for communication 
 function setupSocketClient(){
-	ws = new WebSocket("ws://85.230.4.90:8080/echo");
+	ws = new WebSocket("ws://192.168.1.25:8080/echo");
 	//ws = new WebSocket("ws://130.236.124.119:8080/echo");
 
 	ws.onmessage = function(evt){
