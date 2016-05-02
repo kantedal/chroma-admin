@@ -4,8 +4,10 @@ var isConnected = false;
 var maskingColorRed = 0;
 var maskingColorGreen = 1;
 var maskingColorBlue = 2;
-var maskingColorDistance = 3;
-var maskingColorAuto = 4;
+var innerRadius = 3;
+var outerRadius = 4;
+var maskingColorDistance = 5;
+var maskingColorAuto = 6;
 
 var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
@@ -50,6 +52,13 @@ function setupUIElements() {
 	    sendMessage(maskingColorDistance, $(this).val());
 	});
 
+	$("#inner-radius").on("change", function(){
+	    sendMessage(innerRadius, $(this).val());
+	});
+	$("#outer-radius").on("change", function(){
+	    sendMessage(outerRadius, $(this).val());
+	});
+
 	$("#masking-color-red").on("change", function(){
 	    sendMessage(maskingColorRed, $(this).val());
 	    $("#mixed-color").css('background', "rgb("+
@@ -84,6 +93,12 @@ function changeUIElements(index, val) {
    	break;
    	case maskingColorBlue:
    		$( "#masking-color-blue" ).val( val );
+   	break;
+   	case innerRadius:
+   		$( "#inner-radius" ).val( val );
+   	break;
+   	case outerRadius:
+   		$( "#outer-radius" ).val( val );
    	break;
    	case maskingColorDistance:
    		$( "#color-tolerance" ).val( val );
