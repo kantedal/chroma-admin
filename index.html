@@ -7,6 +7,11 @@
 	<link rel="stylesheet" href="style/style.css">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://apis.google.com/js/client.js"></script>
+
+
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="js/jquery-1.12.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
@@ -32,21 +37,21 @@
 		</div>
 
 		<div style="margin:3%;">
-			<div data-role="rangeslider" id="depth-range-slider">
-				<label for="depth-range-lower">Djuptolerans:</label>
-				<input name="depth-range-lower" id="depth-range-lower" min="0" max="65535" value="0" type="range" />
-				<label for="depth-range-higher">Djuptolerans:</label>
-				<input name="depth-range-higher" id="depth-range-higher" min="0" max="65535" value="65535" type="range" />
-			</div>
 
 			<label for="color-tolerance">Färgtolerans:</label>
 			<input name="color-tolerance" id="color-tolerance" min="0" max="255" value="0" type="range"/>
+			<label for="inner-radius">Inre Radie:</label>
+			<input name="inner-radius" id="inner-radius" min="0" max="1" step="0.01"value="0" type="range"/>
+			<label for="outer-radius">Yttre Radie:</label>
+			<input name="outer-radius" id="outer-radius" min="0" max="1" step="0.01" value="0" type="range"/>
 
 			<label for="masking-color">Maskningsfärg:</label>
 			<input name="masking-color-red" id="masking-color-red" min="0" max="255" value="0" type="range" style="background-color: #bb0000 !important; color:#FFF !important; text-shadow: none !important;"/>
 			<input name="masking-color-green" id="masking-color-green" min="0" max="255" value="0" type="range" style="background-color: #00aa00 !important; color:#FFF !important; text-shadow: none !important;"/>
 			<input name="masking-color-blue" id="masking-color-blue" min="0" max="255" value="0" type="range" style="background-color: #0000aa !important; color:#FFF !important; text-shadow: none !important;"/>
 
+			<button type="button" onclick="sendMessage(maskingColorAuto, 0);">Automatic</button>
+			<button type="button" onclick="fabricsSettings();">Återgå till fabriksinställningar</button>
 			<div id="mixed-color" style="height: 100px;"> </div>
 
 

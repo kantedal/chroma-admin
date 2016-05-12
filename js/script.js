@@ -1,25 +1,42 @@
 var ws;
 var isConnected = false;
 
-var lowerDepthRange = 0;
-var upperDepthRange = 1;
-var maskingColorRed = 2;
-var maskingColorGreen = 3;
-var maskingColorBlue = 4;
-var maskingColorDistance = 5;
 
+var maskingColorRed = 0;
+var maskingColorGreen = 1;
+var maskingColorBlue = 2;
+var innerRadius = 3;
+var outerRadius = 4;
+var maskingColorDistance = 5;
+var maskingColorAuto = 6;
+
+var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
 function setupSocketClient(){
-	ws = new WebSocket("ws://109.58.145.162:8080/echo");
+
+	ref.on("value", function(snapshot) {
+	  var value = snapshot.val();
+	  var IP = value.host_ip;
+	  ws = new WebSocket(IP);
 	//ws = new WebSocket("ws://130.236.124.119:8080/echo");
 
-	ws.onmessage = function(evt){
-		console.log(evt.data);
-	};
+		ws.onmessage = function(evt){
+			
+			var res = evt.data.split(";").map(Number);
+			
+			changeUIElements(res[0], res[1]);
 
-	ws.onopen = function(evt){
-		isConnected = true;
-	}
+		};
+
+		ws.onopen = function(evt){
+			isConnected = true;
+		}
+	  
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+
+
 }
 
 //Attr is the attribute to ed 
@@ -32,16 +49,16 @@ function sendMessage(attr, value){
 
 //Add UI elements
 function setupUIElements() {
-    $("#depth-range-lower").on("change", function(){
-	    sendMessage(lowerDepthRange, $(this).val());
-	});
-
-	$("#depth-range-higher").on("change", function(){
-	    sendMessage(upperDepthRange, $(this).val());
-	});
 
 	$("#color-tolerance").on("change", function(){
 	    sendMessage(maskingColorDistance, $(this).val());
+	});
+
+	$("#inner-radius").on("change", function(){
+	    sendMessage(innerRadius, $(this).val());
+	});
+	$("#outer-radius").on("change", function(){
+	    sendMessage(outerRadius, $(this).val());
 	});
 
 	$("#masking-color-red").on("change", function(){
@@ -69,10 +86,41 @@ function setupUIElements() {
 	});
 }
 
+function changeUIElements(index, val) {
+   switch(index){
+   	case maskingColorRed:
+   		$( "#masking-color-red" ).val( val );
+   	break;
+   	case maskingColorGreen:
+   		$( "#masking-color-green" ).val( val );
+   	break;
+   	case maskingColorBlue:
+   		$( "#masking-color-blue" ).val( val );
+   	break;
+   	case innerRadius:
+   		$( "#inner-radius" ).val( val );
+   	break;
+   	case outerRadius:
+   		$( "#outer-radius" ).val( val );
+   	break;
+   	case maskingColorDistance:
+   		$( "#color-tolerance" ).val( val );
+   	break;
+   }
+}
+function fabricsSettings(){
+	sendMessage(0, 41);
+	sendMessage(1, 210);
+	sendMessage(2, 93);
+	sendMessage(3, 0.3);
+	sendMessage(4, 0.33);
+	sendMessage(5, 24);
+}
 
 window.onload = function(){
-	setupSocketClient();
 	setupUIElements();
+	setupSocketClient();
+
 }
 
 
