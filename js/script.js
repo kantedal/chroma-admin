@@ -105,7 +105,14 @@ function changeUIElements(index, val) {
    	break;
    }
 }
-
+function fabricsSettings(){
+	sendMessage(0, 41);
+	sendMessage(1, 210);
+	sendMessage(2, 93);
+	sendMessage(3, 0.3);
+	sendMessage(4, 0.33);
+	sendMessage(5, 24);
+}
 
 window.onload = function(){
 	setupUIElements();
