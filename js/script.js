@@ -16,8 +16,6 @@ var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
 function setupSocketClient(){
 
-	console.log("socketsetup");
-
 	ref.on("value", function(snapshot) {
 	  var value = snapshot.val();
 	  var IP = value.host_ip;
@@ -54,24 +52,37 @@ function sendMessage(attr, value){
 //Add UI elements
 function setupUIElements() {
 
-	console.log("setup");
-	
-
 	$("#color-tolerance").on("change", function(){
 	    sendMessage(maskingColorDistance, $(this).val());
 	});
 
 	$("#inner-radius").on("change", function(){
+		//check so inner radius cannot be larger than outer radius
+		if ($(this).val() > $("#outer-radius").val()){
+			$(this).val($("#outer-radius").val());
+		}
 	    sendMessage(innerRadius, $(this).val());
 	});
 	$("#outer-radius").on("change", function(){
+		//check so outer radius cant be smaller than inner radius
+		if ($(this).val() < $("#inner-radius").val()){
+			$(this).val($("#inner-radius").val());
+		}
 	    sendMessage(outerRadius, $(this).val());
 	});
 
 	$("#inner-depth-radius").on("change", function(){
+		//check so inner radius cannot be larger than outer radius
+		if ($(this).val() > $("#outer-depth-radius").val()){
+			$(this).val($("#outer-depth-radius").val());
+		}
 	    sendMessage(innerDepthRadius, $(this).val());
 	});
 	$("#outer-depth-radius").on("change", function(){
+		//check so outer radius cant be smaller than inner radius
+		if ($(this).val() < $("#inner-depth-radius").val()){
+			$(this).val($("#inner-depth-radius").val());
+		}
 	    sendMessage(outerDepthRadius, $(this).val());
 	});
 
@@ -102,8 +113,6 @@ function setupUIElements() {
 
 function changeUIElements(index, val) {
 
-	console.log("change");
-
    switch(index){
    	case maskingColorRed:
    		$( "#masking-color-red" ).val( val );
@@ -131,7 +140,7 @@ function changeUIElements(index, val) {
    	break;
    	case outerRadius:
    		$( "#outer-radius" ).val( val );
-   		$( "#outer-radius" ).slider("refresh");
+		$( "#outer-radius" ).slider("refresh");
    	break;
    	case maskingColorDistance:
    		$( "#color-tolerance" ).val( val );
@@ -139,6 +148,8 @@ function changeUIElements(index, val) {
    	break;
    }
 }
+
+
 function fabricsSettings(){
 
 	sendMessage(0, 41);
