@@ -21,8 +21,8 @@ function setupSocketClient(){
 	ref.on("value", function(snapshot) {
 	  var value = snapshot.val();
 	  var IP = value.host_ip;
-	  //ws = new WebSocket(IP);
-	  ws = new WebSocket("ws://192.168.0.115:8080/echo");
+	  ws = new WebSocket(IP);
+	  //ws = new WebSocket("ws://192.168.0.115:8080/echo");
 
 		ws.onmessage = function(evt){
 			
