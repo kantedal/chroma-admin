@@ -16,6 +16,9 @@ var ref = new Firebase("https://kromakey.firebaseio.com/data");
 //Setup web socket client for communication 
 function setupSocketClient(){
 
+	$( "div.connection-container" ).text( "Ansluter..." );
+	$("div.connection-container").css('color', 'black');
+
 	ref.on("value", function(snapshot) {
 	  var value = snapshot.val();
 	  var IP = value.host_ip;
@@ -30,10 +33,24 @@ function setupSocketClient(){
 
 		};
 
+
+
 		ws.onopen = function(evt){
 			isConnected = true;
-			$( "div.connection-container" ).text( "Ansluten!" );
-		}
+			$( "div.connection-container" ).text( "Ansluten" );
+			$("div.connection-container").css('color', '#53BA30');
+		};
+
+		ws.onerror = function(evt){
+			$( "div.connection-container" ).text( "Kunde inte ansluta" );
+			$("div.connection-container").css('color', 'red');
+
+		};
+
+		// ws.onclose = function(evt){
+		// 	$( "div.connection-container" ).text( "Anslutning tappades" );
+		// 	$("div.connection-container").css('color', 'red');
+		// };
 	  
 	}, function (errorObject) {
 	  console.log("The read failed: " + errorObject.code);
@@ -48,6 +65,14 @@ function sendMessage(attr, value){
 		var msg = attr + ";" + value;
 		ws.send(msg);
 	}
+	else
+	{
+		$( "div.connection-container" ).text( "Anslutning tappades" );
+		$("div.connection-container").css('color', 'red');
+		//$( "div.connection-container" ).style( "color: green" );
+
+	}
+
 }
 
 //Add UI elements
