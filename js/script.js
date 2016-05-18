@@ -59,16 +59,16 @@ function setupUIElements() {
 
 	$("#inner-radius").on("change", function(){
 		//check so inner radius cannot be larger than outer radius
-		if ($(this).val() > $("#outer-radius").val()){
-			$(this).val($("#outer-radius").val());
-		}
+		//if ($(this).val() > $("#outer-radius").val()){
+		//	$(this).val($("#outer-radius").val());
+		//}
 	    sendMessage(innerRadius, $(this).val());
 	});
 	$("#outer-radius").on("change", function(){
 		//check so outer radius cant be smaller than inner radius
-		if ($(this).val() < $("#inner-radius").val()){
-			$(this).val($("#inner-radius").val());
-		}
+		//if ($(this).val() < $("#inner-radius").val()){
+		//	$(this).val($("#inner-radius").val());
+		//}
 	    sendMessage(outerRadius, $(this).val());
 	});
 
