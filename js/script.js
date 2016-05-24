@@ -78,18 +78,14 @@ function setupUIElements() {
 	// });
 
 	$("#inner-radius").on("change", function(){
-		// console.log("setupui");
-		// console.log("yttre:" + $("#outer-radius").val());
-		// console.log($(this).val());
-		// console.log($("#inner-radius").val());
-		 //check so inner radius cannot be larger than outer radius
-		if ($("#inner-radius").val() > $("#outer-radius").val()){
-			$("#inner-radius").val($("#outer-radius").val());
-		}
-		
-		// console.log($("#inner-radius").val());
+		// //check so inner radius cannot be larger than outer radius
+		// if ($("#inner-radius").val() > $("#outer-radius").val()){
+		// 	$("#inner-radius").val($("#outer-radius").val());
+		// }
+
 	    sendMessage(innerRadius, $(this).val());
 	});
+
 	$("#outer-radius").on("change", function(){
 		//check so outer radius cant be smaller than inner radius
 		// if ($(this).val() < $("#inner-radius").val()){
