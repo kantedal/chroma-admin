@@ -22,8 +22,8 @@ function setupSocketClient(){
 	ref.on("value", function(snapshot) {
 	  var value = snapshot.val();
 	  var IP = value.host_ip;
-	  ws = new WebSocket(IP);
-	  //ws = new WebSocket("ws://192.168.0.115:8080/echo");
+	  //ws = new WebSocket(IP);
+	  ws = new WebSocket("ws://192.168.1.29:8080/echo");
 
 		ws.onmessage = function(evt){
 			
@@ -46,11 +46,6 @@ function setupSocketClient(){
 			$("div.connection-container").css('color', 'red');
 
 		};
-
-		// ws.onclose = function(evt){
-		// 	$( "div.connection-container" ).text( "Anslutning tappades" );
-		// 	$("div.connection-container").css('color', 'red');
-		// };
 	  
 	}, function (errorObject) {
 	  console.log("The read failed: " + errorObject.code);
@@ -69,7 +64,6 @@ function sendMessage(attr, value){
 	{
 		$( "div.connection-container" ).text( "Anslutning tappades" );
 		$("div.connection-container").css('color', 'red');
-		//$( "div.connection-container" ).style( "color: green" );
 
 	}
 
@@ -77,38 +71,39 @@ function sendMessage(attr, value){
 
 //Add UI elements
 function setupUIElements() {
+	
 
 	// $("#color-tolerance").on("change", function(){
 	//     sendMessage(maskingColorDistance, $(this).val());
 	// });
 
 	$("#inner-radius").on("change", function(){
-		//check so inner radius cannot be larger than outer radius
-		if ($(this).val() > $("#outer-radius").val()){
-			$(this).val($("#outer-radius").val());
+		// console.log("setupui");
+		// console.log("yttre:" + $("#outer-radius").val());
+		// console.log($(this).val());
+		// console.log($("#inner-radius").val());
+		 //check so inner radius cannot be larger than outer radius
+		if ($("#inner-radius").val() > $("#outer-radius").val()){
+			$("#inner-radius").val($("#outer-radius").val());
 		}
+		
+		// console.log($("#inner-radius").val());
 	    sendMessage(innerRadius, $(this).val());
 	});
 	$("#outer-radius").on("change", function(){
 		//check so outer radius cant be smaller than inner radius
-		if ($(this).val() < $("#inner-radius").val()){
-			$(this).val($("#inner-radius").val());
-		}
+		// if ($(this).val() < $("#inner-radius").val()){
+		// 	$(this).val($("#inner-radius").val());
+		// }
+
 	    sendMessage(outerRadius, $(this).val());
 	});
 
 	$("#inner-depth-radius").on("change", function(){
-		//check so inner radius cannot be larger than outer radius
-		// if ($(this).val() > $("#outer-depth-radius").val()){
-		// 	$(this).val($("#outer-depth-radius").val());
-		// }
+		
 	    sendMessage(innerDepthRadius, $(this).val());
 	});
 	// $("#outer-depth-radius").on("change", function(){
-	// 	//check so outer radius cant be smaller than inner radius
-	// 	if ($(this).val() < $("#inner-depth-radius").val()){
-	// 		$(this).val($("#inner-depth-radius").val());
-	// 	}
 	//     sendMessage(outerDepthRadius, $(this).val());
 	// });
 
