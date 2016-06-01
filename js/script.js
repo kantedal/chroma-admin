@@ -10,10 +10,10 @@ var outerRadius = 4;
 // var maskingColorDistance = 5;
 var maskingColorAuto = 6;
 var innerDepthRadius = 7;
-// var outerDepthRadius = 8;	
+// var outerDepthRadius = 8;
 
 var ref = new Firebase("https://kromakey.firebaseio.com/data");
-//Setup web socket client for communication 
+//Setup web socket client for communication
 function setupSocketClient(){
 
 	$( "div.connection-container" ).text( "Ansluter..." );
@@ -26,9 +26,9 @@ function setupSocketClient(){
 	  ws = new WebSocket("ws://192.168.1.29:8080/echo");
 
 		ws.onmessage = function(evt){
-			
+
 			var res = evt.data.split(";").map(Number);
-			
+
 			changeUIElements(res[0], res[1]);
 
 		};
@@ -46,7 +46,7 @@ function setupSocketClient(){
 			$("div.connection-container").css('color', 'red');
 
 		};
-	  
+
 	}, function (errorObject) {
 	  console.log("The read failed: " + errorObject.code);
 	});
@@ -54,7 +54,7 @@ function setupSocketClient(){
 
 }
 
-//Attr is the attribute to ed 
+//Attr is the attribute to ed
 function sendMessage(attr, value){
 	if(isConnected){
 		var msg = attr + ";" + value;
@@ -71,32 +71,22 @@ function sendMessage(attr, value){
 
 //Add UI elements
 function setupUIElements() {
-	
+
 
 	// $("#color-tolerance").on("change", function(){
 	//     sendMessage(maskingColorDistance, $(this).val());
 	// });
 
 	$("#inner-radius").on("change", function(){
-		// //check so inner radius cannot be larger than outer radius
-		// if ($("#inner-radius").val() > $("#outer-radius").val()){
-		// 	$("#inner-radius").val($("#outer-radius").val());
-		// }
-
 	    sendMessage(innerRadius, $(this).val());
 	});
 
 	$("#outer-radius").on("change", function(){
-		//check so outer radius cant be smaller than inner radius
-		// if ($(this).val() < $("#inner-radius").val()){
-		// 	$(this).val($("#inner-radius").val());
-		// }
-
 	    sendMessage(outerRadius, $(this).val());
 	});
 
 	$("#inner-depth-radius").on("change", function(){
-		
+
 	    sendMessage(innerDepthRadius, $(this).val());
 	});
 	// $("#outer-depth-radius").on("change", function(){
@@ -126,6 +116,8 @@ function setupUIElements() {
  //    		$("#masking-color-green").val()+","+
  //    		$("#masking-color-blue").val()+")");
 	// });
+
+
 }
 
 function changeUIElements(index, val) {
