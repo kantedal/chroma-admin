@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="https://apis.google.com/js/client.js"></script>
 
 
@@ -16,14 +16,14 @@
 	<script src="js/jquery-1.12.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/script.js"></script>
-	
+
 	<script>
-	    $(document).bind('mobileinit',function(){
-	        $.mobile.changePage.defaults.changeHash = false;
-	        $.mobile.hashListeningEnabled = false;
-	        $.mobile.pushStateEnabled = false;
-	    });
-	</script> 
+	$(document).bind('mobileinit',function(){
+		$.mobile.changePage.defaults.changeHash = false;
+		$.mobile.hashListeningEnabled = false;
+		$.mobile.pushStateEnabled = false;
+	});
+	</script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,80 +33,107 @@
 <body>
 	<div data-role="page">
 		<div data-role="header" data-add-back-btn="true">
-		   <p align="center">Chromakillers Administratörsinställningar</p>
+			<p align="center">Chromakillers Administratörsinställningar</p>
 		</div>
-		<div class="connection-container" style="margin-left:3%; margin-top:1%" align="center"> Ansluter...
+		<div class="connection-container" style="margin-left:3%; margin-top:1%" align="center"> Logga in
 		</div>
 
 		<div style="margin:3%;">
 			<!-- <label for="color-tolerance">Färgtolerans:</label>
 			<input name="color-tolerance" id="color-tolerance" min="0" max="255" type="range"/> -->
 
+			<!--
 			<label for="inner-radius">Inre radie för färgavstånd:</label>
 			<input name="inner-radius" id="inner-radius" min="0" max="10000" type="range"/>
 
 			<label for="outer-radius">Yttre radie för färgavstånd:</label>
-			<input name="outer-radius" id="outer-radius" min="0" max="10000" type="range"/>
-
-			<label for="inner-depth-radius">Djuptolerans:</label>
-			<input name="inner-depth-radius" id="inner-depth-radius" min="0" max="20000" step="1" type="range"/>
-
-			<!-- <label for="outer-depth-radius">Yttre radie för djup:</label>
-			<input name="outer-depth-radius" id="outer-depth-radius" min="0" max="10000" step="1" type="range"/> -->
-
-			<!-- <label for="masking-color">Maskningsfärg:</label>
-			<input name="masking-color-red" id="masking-color-red" min="0" max="255"  type="range" style="background-color: #bb0000 !important; color:#FFF !important; text-shadow: none !important;"/>
-			<input name="masking-color-green" id="masking-color-green" min="0" max="255" type="range" style="background-color: #00aa00 !important; color:#FFF !important; text-shadow: none !important;"/>
-			<input name="masking-color-blue" id="masking-color-blue" min="0" max="255" type="range" style="background-color: #0000aa !important; color:#FFF !important; text-shadow: none !important;"/> -->
-
-			<button type="button" onclick="sendMessage(maskingColorAuto, 0);">Automatisk inställning av maskningsfärg</button>
-			<button type="button" onclick="fabricsSettings();">Återgå till fabriksinställningar</button>
-			<button type="button" onclick="setupSocketClient();">Återanslut</button>
-			<!-- <div id="mixed-color" style="height: 100px;"> </div> -->
+			<input name="outer-radius" id="outer-radius" min="0" max="10000" type="range"/>-->
 
 
+			<div id="controls">
+
+				<label for="radius">Inre och yttre radie för färgavstånd:</label>
+				<div data-role="rangeslider">
+					<input type="range" name="inner-radius" id="inner-radius" min="0" max="10000" step="1">
+					<input type="range" name="outer-radius" id="outer-radius" min="0" max="10000" step="1">
+				</div>
+
+				<label for="inner-depth-radius">Djuptolerans:</label>
+				<input name="inner-depth-radius" id="inner-depth-radius" min="0" max="20000" step="1" type="range"/>
+
+
+
+
+				<!-- <label for="outer-depth-radius">Yttre radie för djup:</label>
+				<input name="outer-depth-radius" id="outer-depth-radius" min="0" max="10000" step="1" type="range"/> -->
+
+				<!-- <label for="masking-color">Maskningsfärg:</label>
+				<input name="masking-color-red" id="masking-color-red" min="0" max="255"  type="range" style="background-color: #bb0000 !important; color:#FFF !important; text-shadow: none !important;"/>
+				<input name="masking-color-green" id="masking-color-green" min="0" max="255" type="range" style="background-color: #00aa00 !important; color:#FFF !important; text-shadow: none !important;"/>
+				<input name="masking-color-blue" id="masking-color-blue" min="0" max="255" type="range" style="background-color: #0000aa !important; color:#FFF !important; text-shadow: none !important;"/> -->
+
+
+
+
+
+				<button type="button" onclick="sendMessage(maskingColorAuto, 0);">Automatisk inställning av maskningsfärg</button>
+				<button type="button" onclick="fabricsSettings();">Återgå till fabriksinställningar</button>
+				<button type="button" onclick="setupSocketClient();">Återanslut</button>
+				<!-- <div id="mixed-color" style="height: 100px;"> </div> -->
+
+			</div>
+
+			<div id="loginForm">
+				<label for="username">Användarnamn:</label>
+				<input name="username" id="username" placeholder="Fyll i mailadress..." type="text"/>
+				<label for="password">Lösenord:</label>
+				<input name="password" id="password" placeholder="Fyll i lösenord..." type="text"/>
+				<button type"button" onclick="loginUser()">Logga in</button>
+			</div>
 
 		</div>
 
-	</div>	
-
-<!-- 	<div class="attributeBox">
-		<p>
-		  <label for="amount">Djuptolerans:</label>
-		  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-		</p>
-		 
-		<div id="depth-range-slider"></div>
-	</div>		
-
-	<div class="attributeBox">
-		<p>	
-			<input type="text" id="maskingColorDistanceText" readonly style="border:0; color:#f6931f; font-weight:bold;">
-		</p>
-		<div id="maskingColorDistance-slider"></div>
 	</div>
 
-	<div class="attributeBox">
-		<div id="colorBoxes">
-			<div class="colorBox">
-				<p class="attributeHeader">Röd</p>
-				<input type="number" value="0" max="255" min="0" id="maskingColorRed" class="textbox">
-			</div>
 
-			<div class="colorBox">
-				<p class="attributeHeader">Grön</p>
-				<input type="number" value="0" max="255" min="0" id="maskingColorGreen" class="textbox">
-			</div>
 
-			<div class="colorBox">
-				<p class="attributeHeader">Blå</p>
-				<input type="number" value="0" max="255" min="0" id="maskingColorBlue" class="textbox">
-			</div>
-		</div>
+	<!-- 	<div class="attributeBox">
+	<p>
+	<label for="amount">Djuptolerans:</label>
+	<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
 
-		<div id="selectedColor" style="height:100px; background: rgb(255,255,255);">
-		</div>
-	</div> -->
+<div id="depth-range-slider"></div>
+</div>
+
+<div class="attributeBox">
+<p>
+<input type="text" id="maskingColorDistanceText" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+<div id="maskingColorDistance-slider"></div>
+</div>
+
+<div class="attributeBox">
+<div id="colorBoxes">
+<div class="colorBox">
+<p class="attributeHeader">Röd</p>
+<input type="number" value="0" max="255" min="0" id="maskingColorRed" class="textbox">
+</div>
+
+<div class="colorBox">
+<p class="attributeHeader">Grön</p>
+<input type="number" value="0" max="255" min="0" id="maskingColorGreen" class="textbox">
+</div>
+
+<div class="colorBox">
+<p class="attributeHeader">Blå</p>
+<input type="number" value="0" max="255" min="0" id="maskingColorBlue" class="textbox">
+</div>
+</div>
+
+<div id="selectedColor" style="height:100px; background: rgb(255,255,255);">
+</div>
+</div> -->
 
 </body>
 </html>
