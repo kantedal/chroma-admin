@@ -12,18 +12,21 @@ var maskingColorAuto = 6;
 var innerDepthRadius = 7;
 // var outerDepthRadius = 8;
 
-var ref = new Firebase("https://kromakey.firebaseio.com/data");
+var ref = new Firebase("https://kromakey.firebaseio.com/");
+
+var dataRef = ref.child("data");
+
 //Setup web socket client for communication
 function setupSocketClient(){
 
 	$( "div.connection-container" ).text( "Ansluter..." );
 	$("div.connection-container").css('color', 'black');
 
-	ref.on("value", function(snapshot) {
-	  var value = snapshot.val();
-	  var IP = value.host_ip;
-	  //ws = new WebSocket(IP);
-	  ws = new WebSocket("ws://192.168.1.29:8080/echo");
+	dataRef.on("value", function(snapshot) {
+		var value = snapshot.val();
+		var IP = value.host_ip;
+		//ws = new WebSocket(IP);
+		ws = new WebSocket("ws://192.168.1.29:8080/echo");
 
 		ws.onmessage = function(evt){
 
@@ -48,7 +51,7 @@ function setupSocketClient(){
 		};
 
 	}, function (errorObject) {
-	  console.log("The read failed: " + errorObject.code);
+		console.log("The read failed: " + errorObject.code);
 	});
 
 
@@ -78,43 +81,45 @@ function setupUIElements() {
 	// });
 
 	$("#inner-radius").on("change", function(){
-	    sendMessage(innerRadius, $(this).val());
+		sendMessage(innerRadius, $(this).val());
 	});
 
 	$("#outer-radius").on("change", function(){
-	    sendMessage(outerRadius, $(this).val());
+		sendMessage(outerRadius, $(this).val());
 	});
 
 	$("#inner-depth-radius").on("change", function(){
 
-	    sendMessage(innerDepthRadius, $(this).val());
+		sendMessage(innerDepthRadius, $(this).val());
 	});
 	// $("#outer-depth-radius").on("change", function(){
 	//     sendMessage(outerDepthRadius, $(this).val());
 	// });
 
+	$("#controls").hide();
+
 	// $("#masking-color-red").on("change", function(){
 	//     sendMessage(maskingColorRed, $(this).val());
 	//     $("#mixed-color").css('background', "rgb("+
- //    		$("#masking-color-red").val()+","+
- //    		$("#masking-color-green").val()+","+
- //    		$("#masking-color-blue").val()+")");
+	//    		$("#masking-color-red").val()+","+
+	//    		$("#masking-color-green").val()+","+
+	//    		$("#masking-color-blue").val()+")");
 	// });
 
 	// $("#masking-color-green").on("change", function(){
 	//     sendMessage(maskingColorGreen, $(this).val());
 	//     $("#mixed-color").css('background', "rgb("+
- //    		$("#masking-color-red").val()+","+
- //    		$("#masking-color-green").val()+","+
- //    		$("#masking-color-blue").val()+")");
+	//    		$("#masking-color-red").val()+","+
+	//    		$("#masking-color-green").val()+","+
+	//    		$("#masking-color-blue").val()+")");
 	// });
 
 	// $("#masking-color-blue").on("change", function(){
 	//     sendMessage(maskingColorBlue, $(this).val());
 	//     $("#mixed-color").css('background', "rgb("+
- //    		$("#masking-color-red").val()+","+
- //    		$("#masking-color-green").val()+","+
- //    		$("#masking-color-blue").val()+")");
+	//    		$("#masking-color-red").val()+","+
+	//    		$("#masking-color-green").val()+","+
+	//    		$("#masking-color-blue").val()+")");
 	// });
 
 
@@ -122,40 +127,40 @@ function setupUIElements() {
 
 function changeUIElements(index, val) {
 
-   switch(index){
-   	// case maskingColorRed:
-   	// 	$( "#masking-color-red" ).val( val );
-   	// 	$( "#masking-color-red" ).slider("refresh");
-   	// break;
-   	// case maskingColorGreen:
-   	// 	$( "#masking-color-green" ).val( val );
-   	// 	$( "#masking-color-green" ).slider("refresh");
-   	// break;
-   	// case maskingColorBlue:
-   	// 	$( "#masking-color-blue" ).val( val );
-   	// 	$( "#masking-color-blue" ).slider( "refresh");
-   	// break;
-   	case innerDepthRadius:
-   		$( "#inner-depth-radius" ).val( val );
-   		$( "#inner-depth-radius" ).slider( "refresh");
-   	break;
-   	// case outerDepthRadius:
-   	// 	$( "#outer-depth-radius" ).val( val );
-   	// 	$( "#outer-depth-radius" ).slider("refresh");
-   	// break;
-   	case innerRadius:
-   		$( "#inner-radius" ).val( val );
-   		$( "#inner-radius" ).slider( "refresh");
-   	break;
-   	case outerRadius:
-   		$( "#outer-radius" ).val( val );
+	switch(index){
+		// case maskingColorRed:
+		// 	$( "#masking-color-red" ).val( val );
+		// 	$( "#masking-color-red" ).slider("refresh");
+		// break;
+		// case maskingColorGreen:
+		// 	$( "#masking-color-green" ).val( val );
+		// 	$( "#masking-color-green" ).slider("refresh");
+		// break;
+		// case maskingColorBlue:
+		// 	$( "#masking-color-blue" ).val( val );
+		// 	$( "#masking-color-blue" ).slider( "refresh");
+		// break;
+		case innerDepthRadius:
+		$( "#inner-depth-radius" ).val( val );
+		$( "#inner-depth-radius" ).slider( "refresh");
+		break;
+		// case outerDepthRadius:
+		// 	$( "#outer-depth-radius" ).val( val );
+		// 	$( "#outer-depth-radius" ).slider("refresh");
+		// break;
+		case innerRadius:
+		$( "#inner-radius" ).val( val );
+		$( "#inner-radius" ).slider( "refresh");
+		break;
+		case outerRadius:
+		$( "#outer-radius" ).val( val );
 		$( "#outer-radius" ).slider("refresh");
-   	break;
-  //  	case maskingColorDistance:
-  //  		$( "#color-tolerance" ).val( val );
+		break;
+		//  	case maskingColorDistance:
+		//  		$( "#color-tolerance" ).val( val );
 		// $( "#color-tolerance" ).slider("refresh");
-  //  	break;
-   }
+		//  	break;
+	}
 }
 
 
@@ -171,13 +176,32 @@ function fabricsSettings(){
 	//sendMessage(8, 0.33*10000);
 }
 
+
+function loginUser(){
+	ref.authWithPassword({
+		email    : $("#username").val(),
+		password : $("#password").val()
+	}, function(error, authData) {
+		if (error) {
+			$( "div.connection-container" ).text( "Felaktigt lösenord eller mailadress" );
+			$("div.connection-container").css('color', 'red');
+			console.log("Login Failed!", error);
+		} else {
+			$( "#controls" ).show();
+			$( "#loginForm" ).hide();
+			setupSocketClient();
+			console.log("Authenticated successfully with payload:", authData);
+		}
+	});
+}
+
 window.onload = function(){
 	setupUIElements();
-	setupSocketClient();
+	//setupSocketClient();
 
 }
 
 
 window.onclose = function(){
-  ws.close();
+	ws.close();
 }
