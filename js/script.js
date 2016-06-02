@@ -23,7 +23,7 @@ function setupSocketClient(){
 	$("div.connection-container").css('color', 'black');
 
 
-	ref.on("value", function(snapshot) {
+	dataRef.on("value", function(snapshot) {
 	  var value = snapshot.val();
 	  var IP = value.host_ip;
 	  ws = new WebSocket(IP);
