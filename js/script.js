@@ -22,11 +22,12 @@ function setupSocketClient(){
 	$( "div.connection-container" ).text( "Ansluter..." );
 	$("div.connection-container").css('color', 'black');
 
-	dataRef.on("value", function(snapshot) {
-		var value = snapshot.val();
-		var IP = value.host_ip;
-		//ws = new WebSocket(IP);
-		ws = new WebSocket("ws://192.168.1.29:8080/echo");
+
+	ref.on("value", function(snapshot) {
+	  var value = snapshot.val();
+	  var IP = value.host_ip;
+	  ws = new WebSocket(IP);
+	  //ws = new WebSocket("ws://192.168.1.29:8080/echo");
 
 		ws.onmessage = function(evt){
 
